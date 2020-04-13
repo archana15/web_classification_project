@@ -1,0 +1,48 @@
+text classification :
+    text 
+    loss, waste 
+    /data
+        /train
+            /loss #label
+                file.txt
+            /waste #label 
+                file.txt
+        /test
+            /loss
+                files.txt
+            /waste
+                files.txt
+
+loading_dataset:
+    train_text -> train_label
+    test_text -> text_label 
+
+vectorization:
+    vectorized train,
+    vectorized text data
+    #numerical values -> to machine learining algorithm 
+
+model_building: 
+    model :
+    no of units ?
+    no of layers ?
+    batch size ?
+    data : by scrapping 
+    learning rate
+    epochs
+    dropout rate 
+
+training:
+    accuracy
+    fit fun =   validates
+                trains
+                adjusts weights 
+
+
+
+
+
+
+
+    
+    
