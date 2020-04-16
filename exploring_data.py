@@ -25,13 +25,13 @@ def plot_sample_length_distribution(sample_texts):
     plt.title('Sample length distribution')
     plt.show()
     
-columns = ['0','category','title','desc']
-((train_text,train_text),(test_text,test_label)) = load_data("/Users/archana/web_classification/dmoz.csv", columns)
-no_rows,words_per_row = get_num_of_words_per_sample(train_text)
-print(no_rows)
-print(words_per_row)
-print("ratio :")
-print(no_rows//words_per_row) 
+# columns = ['0','category','title','desc']
+# ((train_text,train_text),(test_text,test_label)) = load_data("/Users/archana/web_classification/test.csv", columns)
+# no_rows,words_per_row = get_num_of_words_per_sample(train_text)
+# print(no_rows)
+# print(words_per_row)
+# print("ratio :")
+# print(no_rows//words_per_row) 
 #plot_sample_length_distribution(train_text)
 
 
