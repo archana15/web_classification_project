@@ -19,10 +19,18 @@ loading_dataset:
     train_text -> train_label
     test_text -> text_label 
 
+explore_data:
+    x axis - length of decs rows (text from each website)
+    y axis -  how many rows with same lenght 
+
 vectorization:
     vectorized train,
     vectorized text data
     #numerical values -> to machine learining algorithm 
+
+    sequence vectors :
+        - order is important 
+        - 
 
 model_building: 
     model :

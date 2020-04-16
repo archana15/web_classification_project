@@ -4,7 +4,8 @@ from sklearn.feature_selection import f_classif
 
 NGRAM_RANGE = (1, 2)
 TOP_K = 20000
-TOKEN_MODE = 'word'
+MAX_SEQUENCE_LENGTH = 500
 
-def ngram_vectorize(train_texts, train_labels, val_texts):
+def ngram_vectorize(train_texts, val_texts):
+    
     
