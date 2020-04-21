@@ -18,30 +18,21 @@ def sequence_vectorize(train_texts, val_texts):
         texts and word index dictionary.'''
     
     #vocabulary
-    tokenizer = text.Tokenizer(num_words=TOP_K)
+    tokenizer = text.Tokenizer(num_words=TOP_K) 
     tokenizer.fit_on_texts(train_texts) 
 
     #vectorisation
     x_train = tokenizer.texts_to_sequences(train_texts)
     x_val = tokenizer.texts_to_sequences(val_texts)
 
-    max_length = len(max(x_train, key=len))
+    max_length = len(max(x_train, key=len)) # if the text is more 500 words it gets truncated to 500 words 
     if max_length > MAX_SEQUENCE_LENGTH:
         max_length = MAX_SEQUENCE_LENGTH
 
-    x_train = sequence.pad_sequences(x_train, maxlen=max_length)
+    x_train = sequence.pad_sequences(x_train, maxlen=max_length) # if the length of the text is less than 500 the sequence is added with more words
     x_val = sequence.pad_sequences(x_val, maxlen=max_length)
     return x_train, x_val, tokenizer.word_index
 
 columns = ['0','category','title','desc']
-((train_text,train_text),(test_text,test_label)) = load_data("/Users/archana/web_classification/dmoz.csv", columns)
-#no_rows,words_per_row = get_num_of_words_per_sample(train_text)
-train, test, tokenizer = sequence_vectorize (train_text,test_text)
-# print(train)
-# print("--------------------------------------------------------------------")
-print(test)
-# print("---------------------------------------------------------------------")
-# print(tokenizer)
-
-
-    
+((train_text,train_labels),(test_text,test_labels))  = load_data("/Users/archana/web_classification/test.csv", columns)
+print(sequence_vectorize(train_text, test_text))
