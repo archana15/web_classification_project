@@ -21,12 +21,44 @@ loading_dataset:
 
 explore_data:
     x axis - length of decs rows (text from each website)
-    y axis -  how many rows with same lenght 
+    y axis -  how many rows with same length 
+
+    samples/number of words per sample ratio = 838860/14.0 = 59918.0
+    ratio > 1500
+
+    tokenize the text as sequences 
+    use sepCNN model to classify them 
+    a. Split the samples into words; select the top 20K words based on their frequency.
+    b. Convert the samples into word sequence vectors.
+
+    *****************c. If the original number of samples/number of words per sample ratio is less
+     than 15K, using a fine-tuned pre-trained embedding with the sepCNN
+     model will likely provide the best results.********************** ???? 
+    
+    We use sequence model with
+    pre-trained embeddings that are fine-tuned for text classification when the
+    ratio of number of samples to number of words per sample for the given dataset
+    is neither small nor very large (~> 1500 && ~< 15K)
+
 
 vectorization:
     vectorized train,
     vectorized text data
     #numerical values -> to machine learining algorithm 
+
+    two options :
+        on-hot coding 
+        word embeddings
+
+        word embedding:
+            Words have meaning(s) associated with them.
+            As a result, we can represent word tokens in a dense vector space (~few hundred real numbers), 
+            where the location and distance between words indicates how similar they are semantically
+
+    model :
+    first layer - embedding
+    This layer learns to turn word index sequences into word embedding vectors during the training process, 
+    such that each word index gets mapped to a dense vector of real values representing that word’s location in semantic space
 
     sequence vectors :
         - order is important 
@@ -42,13 +74,41 @@ model_building:
     epochs
     dropout rate 
 
+    - sequence models : models that can learn from the adjacency of tokens.
+        includes CNN or RNN classes of model 
+    - Data is pre-processed as sequence vectors for these models.
+    - they have to learn a large number of parameters
+    - first layer : 
+        embedding layer
+        learns the relationship between the words in a dense vector space 
+        *Learning word relationships works best over many samples
+        - pre-trained embeddings : 
+            Words in a given dataset are most likely not unique to that dataset
+            We can learn the relationship between the words in our dataset using other dataset(s).
+            we can transfer an embedding learned from another dataset into our embedding layer
+            these embedding is knows as pre-trained embedding 
+            gives the model a head start in the learning process
+    
+    ['Arts', 'Business', 'Computers', 'Games', 'Health', 'Home', 'News', 'Recreation', 'Reference', 'Science', 'Shopping']
+    ['Shopping', 'Society']
+
+    total labels : 13 
+    number of classes : 13
+
+
 training:
     accuracy
     fit fun =   validates
                 trains
                 adjusts weights 
+    
+    Embedding dimensions: The number of dimensions we want to use to represent word embeddings—
+    i.e., the size of each word vector. 
+    Recommended values: 50–300. 
+    In our experiments, we used GloVe embeddings with 200 dimensions with a pre- trained embedding layer.
 
-
+    uderfitting :
+        
 
 
 

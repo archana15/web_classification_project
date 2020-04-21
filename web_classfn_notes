@@ -1,0 +1,104 @@
+modules :
+    1. loading_data :
+        data_load method loads the dataset into python
+        - it loads the dataset 
+    2. exploring_data :
+        - verify the data - see if the text belong to the appropriate category(label), after loading
+        - we can know the dataset matrics 
+            eg : no of examples 
+                numbers of categories 
+                median no of words 
+                no of words per sample 
+    3. vectorization :
+        tokenizing the text
+        every word is given a float value so that it can be given as i/p to ML algorithm 
+    4. building_model :
+        - we are building a sepCNN model 
+        - this model is a base for the training 
+        - basically assemblining layers - layers allow us to specify the sequence of transformations we want to perform on input
+    5. training_model :
+        - making prediction based on the current state of the model 
+        - trying to make the prediction better 
+
+1. loading_data :
+    - i/p : out dataset 
+    - o/p : 
+        train set :
+            labels/categories : 
+            train text 
+        test set :
+            labels/categories 
+            test text 
+    - we read data from csv file 
+    - we shuffle the data : impt to shuffle so that the data is properly distributed between train and test 
+    - data shouldn't be ordered
+    - we assingn a number to every label/category 
+    - we get data : 80% train and 20% test 
+
+2. exploring_data :
+*important for deciding which model to choose 
+    1. get_num_of_words_per_sample:
+        - input : sample text
+        - output : word count , median word count    
+
+    2. plot_sample_length_distribution:
+        - i/p - sample text 
+        - o/p - histogram 
+
+    - we plot the graph of the distribution of the words in every desc 
+    - histogram 
+    - it says x no of desc have y number of words 
+    - we get the ratio : s/w (number of samples/number of words per sample)
+    this ratio helps us decide which model to choose :
+    s/w < 1500 : mlp model 
+    s/w > 1500 : sequence model, sepCNN model 
+    our case : s/w > 1500
+
+3. vectorization :
+    i/p - train_text, test_text 
+    o/p - vectorized training, testing texts and word index dictionary
+        word index dictionary : every words gets a numeric value asigned 
+    
+    - no of features selected : 20k
+    - check s/w ratio 
+        838860/14.0 = 59918.0 > 15000
+    - since s/w < 15k we use ***fine-tuned-pre-embedding*** embeddings leraned from scratch 
+    * We observed that for S/W > 15K, 
+    starting from scratch effectively yields about the same accuracy as using fine-tuned embedding.
+    - CNN/RNN models infer meaning from the order of the words in sample 
+    - therefore we represent the text as a sequence of tokens, preserving order.
+
+    - we set the features to 20k
+    - the max length of text is 500, after 500 the text will be truncated 
+
+    - text representation : word-level representation 
+    - convert text into sequence of words 
+    assign a numeric value to these words 
+
+    option to tokenizing:
+    1. One-hot encoding - good for characters 
+    2. Word embeddings
+
+    we use Word embeddings : the location and distance between words indicates how similar they are
+   
+    - tokenizer = text.Tokenizer(num_words=TOP_K) :
+        this tokenizes a text corpus.
+        num_words : specifies how many words to keep 
+
+    - tokenizer.fit_on_texts(train_texts) :
+        prepares vocabulary based of on the list of words in train_text 
+
+    - tokenizer.texts_to_sequences(train_texts) :
+        Transforms list of text into a sequence.
+
+    - len(max(x_train, key=len))
+        returns the string with max length 
+
+4. building_model :
+    - CNN and RNN model learns fromt he adjecent layers , that is why pre trained embedding layers is used 
+    - Sequence models generally have a larger number of parameters to learn. 
+    The first layer in these models is an embedding layer, which learns the relationship between the words
+    - 
+
+vectors
+avg vs median
